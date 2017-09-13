@@ -95,10 +95,14 @@ const Link = React.createClass({
 
     event.preventDefault()
 
-    const { to, query, hash, state } = this.props
+    const { to, query, hash, state, replace } = this.props
     const location = createLocationDescriptor(to, { query, hash, state })
 
-    this.context.router.push(location)
+    if (replace) {
+      this.context.router.replace(location)
+    } else {
+      this.context.router.push(location)
+    }
   },
 
   render() {
